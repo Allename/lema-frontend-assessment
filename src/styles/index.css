@@ -64,5 +64,26 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-size: 16px;
+    min-height: 100dvh;
+    line-height: 1.5;
   }
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
+
+:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Or if you're using plain focus */
+:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
