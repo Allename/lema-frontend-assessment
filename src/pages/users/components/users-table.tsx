@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Loader from "@/components/loader/loader";
+import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -30,8 +31,6 @@ const UsersTable = () => {
 
   const PAGE_SIZE = 4;
 
-  console.log(pageNumber, setPageNumber);
-
   const users = useQuery({
     queryKey: ["users", { pageNumber, pageSize: PAGE_SIZE }],
     queryFn: fetchUsers,
@@ -42,11 +41,11 @@ const UsersTable = () => {
     queryFn: fetchUsersCount,
   });
 
-  console.log(userCount?.data?.count);
   const userData = users?.data;
   const totalCount = userCount?.data?.count;
   const totalPages =
     totalCount && totalCount > 0 ? Math.ceil(totalCount / PAGE_SIZE) : 1;
+
   const formatAddress = (addr: any) =>
     `${addr.street}, ${addr.city}, ${addr.state}. ${addr.zipcode}`;
 
@@ -65,7 +64,6 @@ const UsersTable = () => {
     }
   };
 
-  // Generate smart page numbers
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
     const maxVisible = 5;
@@ -105,13 +103,26 @@ const UsersTable = () => {
       <div className="border border-[#E2E8F0] rounded-md min-h-[220px]">
         {users.isFetching ? (
           <Loader />
+        ) : users.isError ? (
+          <div role="alert" className="p-4 text-red-600">
+            Failed to load users.
+            <Button
+              variant='outline'
+              className="ml-2 underline text-red-700"
+              onClick={() => users.refetch()}
+            >
+              Retry
+            </Button>
+          </div>
         ) : (
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead className="text-[#62748E]">Full Name</TableHead>
                 <TableHead className="text-[#62748E]">Email</TableHead>
-                <TableHead className="text-[#62748E] max-w-[392px] truncate">Address</TableHead>
+                <TableHead className="text-[#62748E] max-w-[392px] truncate">
+                  Address
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

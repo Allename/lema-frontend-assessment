@@ -1,9 +1,12 @@
 import { Button } from '@/components/ui/button';
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, redirect } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
+  beforeLoad: () => {
+    throw redirect({ to: "/users", replace: true });
+  },
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
   return (
