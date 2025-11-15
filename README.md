@@ -1,73 +1,145 @@
-# React + TypeScript + Vite
+# Lema Frontend Assessment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript + Tailwind CSS frontend for the Lema assessment.
 
-Currently, two official plugins are available:
+The app talks to the backend API and provides:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* A paginated users table
+* A user posts page with create and delete actions
+* Proper loading and error states
+* At least one unit test using Vitest
 
-## React Compiler
+### Cross-cutting Requirements
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React Query used for data fetching, caching, and syncing
+* Tailwind CSS for responsive styling
+* Clean, modular code
+* Reused logic through custom hooks or utilities
+* Clear loading, and error states on all data views
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* **Framework**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  * React
+  * TypeScript
+  * Vite
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* **Routing**
+
+  * `@tanstack/react-router`
+
+* **Data fetching**
+
+  * `@tanstack/react-query`
+  * `axios`
+
+* **Styling**
+
+  * Tailwind CSS
+
+* **Testing**
+
+  * Vitest
+  * React Testing Library
+
+## Folder Structure
+
+```txt
+.
+├── src/
+│   ├── assets/
+│   ├── components/      # Reusable UI components
+│   ├── context/         # Shared React context providers
+│   ├── hooks/           # Custom hooks (data + UI logic)
+│   ├── lib/             # Utilities, helpers, config
+│   ├── pages/           # Page-level components
+│   ├── routes/          # Route definitions (TanStack Router)
+│   ├── services/        # API services (axios clients, queries)
+│   ├── styles/ 
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Frontend uses Vite env variables.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Create a `.env` file in the project root:
+
+```env
+VITE_API_BASE_URL=https://lema-backend-assessment-production-url.com
+```
+
+* `VITE_API_BASE_URL`
+
+  * Base URL of the backend API
+  * All requests in services use this value
+
+Keep `.env` out of git. The file is already included in `.gitignore`.
+
+
+## Getting Started
+
+### Prerequisites
+
+* Node.js 18+
+* yarn
+
+### Clone the repo
+
+```bash
+git clone https://github.com/Allename/lema-frontend-assessment.git
+cd lema-frontend-assessment
+```
+
+### Install dependencies
+
+```bash
+yarn install
+```
+
+### Run in development
+
+```bash
+yarn dev
+```
+
+Open the URL printed in the terminal, usually:
+
+```text
+http://localhost:3001
+```
+
+## Available Scripts
+
+From the project root:
+
+* **Start dev server**
+
+```bash
+yarn dev
+```
+
+* **Run tests**
+
+```bash
+yarn test
+```
+
+* **Build for production**
+
+```bash
+yarn build
+```
+
+* **Preview production build**
+
+```bash
+yarn preview
+```
+
+Run:
+
+```bash
+yarn test
 ```
