@@ -42,7 +42,7 @@ const UserDetail = () => {
             </Breadcrumb>
           </div>
 
-          <h1 className="text-4xl">{selectedUser?.name}</h1>
+          <h1 className="text-2xl md:text-4xl">{selectedUser?.name}</h1>
           <div>
             <span className="text-[#62748E]">{selectedUser?.email}</span>
             <span className="">

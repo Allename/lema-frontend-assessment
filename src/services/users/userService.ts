@@ -8,3 +8,8 @@ export const fetchUsers = async ({ queryKey }: { queryKey: [string, FetchUsersPa
   const response = await service.get(`/users?page=${pageNumber}&pageSize=${pageSize}`);
   return response.data;
 }
+
+export const fetchUsersCount = async () => {
+  const response = await service.get(`/users/count`);
+  return response.data;
+}
