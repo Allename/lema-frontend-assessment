@@ -5,6 +5,7 @@ import "./styles/index.css";
 import { routeTree } from "./routeTree.gen.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
+import { SelectedUserProvider } from "./context/SelectedUserContext.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,7 +36,9 @@ declare module "@tanstack/react-router" {
 export function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <SelectedUserProvider>
+        <RouterProvider router={router} />
+      </SelectedUserProvider>
     </>
   );
 }
